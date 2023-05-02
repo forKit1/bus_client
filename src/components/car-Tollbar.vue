@@ -157,7 +157,7 @@ import routesDataTable from './tableComponents/routes-data-table.vue'
     font-size: 24px;
     text-align: left;
     margin-bottom: 50px;
-
+    margin-left: 30px;
 }
 
 .table-search-input{
@@ -225,6 +225,7 @@ font-size: 15px;
 border: none;
 background: none;
 cursor: pointer;
+
 }
 
 </style>
