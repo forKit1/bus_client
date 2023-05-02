@@ -1,5 +1,4 @@
 <template>
-  <button @click="showAddForm" class="add-button">Додати</button>
   <div class='table-wrapper'>
     <table class='table' >
       <thead>
@@ -30,30 +29,21 @@
         @cancel="cancelEdit"
       ></edit-form>
   </div>
-  <div class="popup-container" v-if="addingNewPerson">
-    <add-form
-      @submitNewPerson="submitNewPerson"
-      @cancel="cancelAdd"
-    ></add-form>
-  </div>
 </template>
 
 <script>
 import EditForm from "../tech/EditForm.vue";
-import AddForm from "../tech/AddForm.vue";
 
 export default {
   name: "DataTable",
   components: {
     EditForm,
-    AddForm,
   },
   props:['endpoint', 'columns'],
   data() {
     return {
       data: [],
       editingRow: null,
-      addingNewPerson: false,
       endpointValue:`http://api.autobus.cuqmbr.xyz/${this.endpoint}`
     };
   },
