@@ -36,6 +36,7 @@
 
 <script>
 export default {
+  inject:['globalStore'],
   data() {
     return {
       data: {
@@ -54,15 +55,15 @@ export default {
       console.log("Sending data to server:", this.data);
     },
     async fetchCities() {
-    const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNGM5YWZkYy1kYzEzLTQ3MDktODIxYi0zYmZjMjkzMmRkYWIiLCJuYW1lIjoidXNlciB1c2VyIHVzZXIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoidXNlciIsIm1pZGRsZV9uYW1lIjoidXNlciIsImdlbmRlciI6IlVuZGVmaW5lZCIsImJpcnRoZGF0ZSI6IlVuZGVmaW5lZCIsImVtYWlsIjoiYWRtaW5AYXV0b2J1cy5jb20iLCJlbWFpbF92ZXJpZmllZCI6IlRydWUiLCJleHAiOjE2ODMwNzQ4ODksInJvbGVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6ImFwaS5hdXRvYnVzLmN1cW1ici54eXoiLCJhdWQiOiJhcGkuYXV0b2J1cy5jdXFtYnIueHl6In0.Tha8E0Qd5DXxfLhNjrjBamply3hwpT-VOLGKwOq8euw';
-    const response = await fetch(`http://api.autobus.cuqmbr.xyz/api/cities`, {
-                                headers: {
-                                    'Authorization': `Bearer ${accessToken}`,
-                                },
-                                })
-    const result = await response.json();
-    this.cities = Array.isArray(result) ? result : [result];
-  },
+      const accessToken = this.globalStore.accesBearertoken
+      const response = await fetch(`http://api.autobus.cuqmbr.xyz/api/cities`, {
+                                  headers: {
+                                      'Authorization': `Bearer ${accessToken}`,
+                                  },
+                                  })
+      const result = await response.json();
+      this.cities = Array.isArray(result) ? result : [result];
+    },
   },
   created() {
     this.fetchCities();
