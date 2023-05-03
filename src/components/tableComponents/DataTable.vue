@@ -44,7 +44,7 @@ export default {
     return {
       data: [],
       editingRow: null,
-      endpointValue:`http://api.autobus.cuqmbr.xyz/${this.endpoint}`
+      
     };
   },
   async created() {

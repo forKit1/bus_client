@@ -6,6 +6,12 @@
                 <user-profile></user-profile>
             </div>
 
+            <div :class="this.currentTable==='addresses-data-table'? 'toolbar-button-active' : 'toolbar-button'">
+                <button class="toolbar-button-text-active" @click="changeTable('addresses-data-table')">
+                    Таблиця адрес
+                </button>
+            </div>
+
             <div :class="this.currentTable==='carriers-statistics-data-table'? 'toolbar-button-active' : 'toolbar-button'">
                 <button class="toolbar-button-text-active" @click="changeTable('carriers-statistics-data-table')">
                     Статистика перевізників
@@ -77,6 +83,7 @@ import driversDataTable from './tableComponents/drivers-data-table.vue'
 import driversStatisticsDataTable from './tableComponents/drivers-statistics-data-table.vue'
 import regionsDataTable from './tableComponents/regions-data-table.vue'
 import routesDataTable from './tableComponents/routes-data-table.vue'
+import addressesDataTable from './tableComponents/addresses-data-table.vue'
 
   export default {
       name: "car-toolbar",
@@ -90,6 +97,7 @@ import routesDataTable from './tableComponents/routes-data-table.vue'
         driversStatisticsDataTable,
         regionsDataTable,
         routesDataTable,
+        addressesDataTable,
 
 
 

@@ -1,13 +1,9 @@
 <template>
   <button @click="showAddForm" class="add-button">Додати</button>
   <data-table :endpoint="endpointValue" :columns="columns"></data-table>
-    <div class="popup-container" v-if="addingNewData">
-    <carriers-data-table-add-form @cancel='cancel'></carriers-data-table-add-form>
-    </div>
 </template>
 
 <script>
-import carriersDataTableAddForm from './addForms/carriers-data-table-addForm.vue';
 import DataTable from './DataTable.vue';
 
 
@@ -15,7 +11,6 @@ export default {
   name: 'App',
   components: {
       DataTable,
-      carriersDataTableAddForm,
   },
   data(){
     return{
