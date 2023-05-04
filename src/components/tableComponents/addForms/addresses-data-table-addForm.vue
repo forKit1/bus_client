@@ -7,10 +7,6 @@
         <input type="text" id="name" v-model="data.name" />
       </div>
       <div>
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" v-model="data.fullName" />
-      </div>
-      <div>
         <label for="latitude">Latitude:</label>
         <input type="number" id="latitude" step="0.000001" v-model="data.latitude" />
       </div>
@@ -39,9 +35,9 @@ export default {
   inject:['globalStore'],
   data() {
     return {
+      accessToken : this.globalStore.accesBearertoken,
       data: {
         name: "",
-        fullName: "",
         latitude: null,
         longitude: null,
         cityId: null,
@@ -50,15 +46,35 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      // Replace with your API call to send data to the server
-      console.log("Sending data to server:", this.data);
+    async submitForm() {
+      try {
+        const response = await fetch(`http://api.autobus.cuqmbr.xyz/api/cities`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.accessToken}`,
+            'Access-Control-Allow-Origin': '*',
+          },
+          body: JSON.stringify(this.data),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Success:', result);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    
+
+
     },
     async fetchCities() {
-      const accessToken = this.globalStore.accesBearertoken
       const response = await fetch(`http://api.autobus.cuqmbr.xyz/api/cities`, {
                                   headers: {
-                                      'Authorization': `Bearer ${accessToken}`,
+                                      'Authorization': `Bearer ${this.accessToken}`,
                                   },
                                   })
       const result = await response.json();
